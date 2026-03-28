@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USB PRO VIP - Giao Tiếp Phần Cứng</title>
+    <title>USB PRO VIP - IIT Edition</title>
     <style>
-        /* CSS: Giao diện tối mang phong cách Công nghệ / STEM */
+        /* CSS: Giữ nguyên phong cách Công nghệ */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #0d1117; /* Màu nền giống GitHub Dark */
+            background-color: #0d1117; 
             color: #c9d1d9; 
             margin: 0; 
             padding: 0; 
@@ -50,7 +50,6 @@
             line-height: 1.6; 
         }
 
-        /* Nút Tải xuống tương tác mạnh */
         .download-btn { 
             display: inline-block; 
             padding: 16px 45px; 
@@ -73,22 +72,6 @@
             box-shadow: 0 12px 25px rgba(46, 160, 67, 0.5); 
         }
 
-        .download-btn::after { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: -100%; 
-            width: 100%; 
-            height: 100%; 
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); 
-            transition: all 0.5s ease; 
-        }
-
-        .download-btn:hover::after { 
-            left: 100%; 
-        }
-
-        /* Thẻ tính năng nổi bật */
         .features { 
             display: flex; 
             justify-content: space-between; 
@@ -102,16 +85,8 @@
             border-radius: 12px; 
             width: 45%; 
             border-left: 4px solid #58a6ff; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
         }
 
-        .feature-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            border-left-color: #3fb950;
-        }
-
-        /* Canvas vẽ hạt điện tử background */
         #particles { 
             position: absolute; 
             top: 0; 
@@ -128,48 +103,26 @@
 
     <div class="container">
         <h1>USB PRO VIP</h1>
-        <p class="subtitle">Trạm điều khiển trung tâm cho Vi điều khiển CH55x.<br>Giao tiếp Serial tốc độ cao, nhận diện phần cứng tự động và mô phỏng tín hiệu chính xác.</p>
+        <p class="subtitle">Trạm điều khiển trung tâm cho Vi điều khiển CH55x.<br>Sức mạnh từ đội ngũ <b>IIT</b>.</p>
         
-        <a href="app.exe" class="download-btn" id="dl-btn" download="USB_PRO_VIP.exe">⬇ Tải Phần Mềm (v1.0)</a>
+        <a href="#" class="download-btn" id="dl-btn">⬇ Tải Phần Mềm (v1.0)</a>
         
         <div class="features">
             <div class="feature-card">
-                <h3 style="color: #58a6ff; margin-top: 0;">⚡ Giao Tiếp Real-time</h3>
-                <p style="font-size: 0.9em; color: #8b949e;">Kiểm soát độ trễ thấp với cơ chế quét WMI và phản hồi trực quan qua LED.</p>
+                <h3 style="color: #58a6ff; margin-top: 0;">⚡ IIT Speed</h3>
+                <p style="font-size: 0.9em; color: #8b949e;">Tối ưu hóa mã nguồn bởi các chuyên gia IIT cho tốc độ phản hồi cực nhanh.</p>
             </div>
             <div class="feature-card">
-                <h3 style="color: #3fb950; margin-top: 0;">🔧 Auto-Detect</h3>
-                <p style="font-size: 0.9em; color: #8b949e;">Cắm là chạy (Plug & Play). Tự động mở cổng COM mà không cần cài đặt rườm rà.</p>
+                <h3 style="color: #3fb950; margin-top: 0;">🔧 Linh Hoạt</h3>
+                <p style="font-size: 0.9em; color: #8b949e;">Hỗ trợ đa nền tảng, cắm là chạy, giao diện thân thiện người dùng.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- JS: Tạo hiệu ứng phản hồi khi người dùng nhấn nút Tải xuống ---
-        const dlBtn = document.getElementById('dl-btn');
-        dlBtn.addEventListener('click', function(e) {
-            const originalText = this.innerHTML;
-            
-            this.innerHTML = "⏳ Đang kết nối máy chủ...";
-            this.style.background = "linear-gradient(135deg, #1f6feb, #388bfd)";
-            this.style.boxShadow = "0 8px 20px rgba(31, 111, 235, 0.4)";
-            
-            // Trả lại trạng thái sau 2.5 giây
-            setTimeout(() => {
-                this.innerHTML = "✅ Đã tải thành công!";
-                this.style.background = "linear-gradient(135deg, #2ea043, #238636)";
-                
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                }, 3000);
-            }, 2500);
-        });
-
-        // --- JS: Khởi tạo luồng hạt (Particles) mô phỏng luồng dữ liệu truyền qua USB ---
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         
-        // Cập nhật kích thước canvas vừa với màn hình
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -183,30 +136,32 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 1.5 - 0.75; // Tốc độ trôi ngang
-                this.speedY = Math.random() * 1.5 - 0.75; // Tốc độ trôi dọc
+                // Kích thước font chữ ngẫu nhiên từ 10px đến 18px
+                this.fontSize = Math.random() * 8 + 10; 
+                this.speedX = Math.random() * 1.0 - 0.5; 
+                this.speedY = Math.random() * 1.0 - 0.5;
+                // Độ mờ ngẫu nhiên để tạo chiều sâu
+                this.opacity = Math.random() * 0.5 + 0.1;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 
-                // Nối đầu/cuối màn hình
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
+                if (this.x < -20) this.x = canvas.width + 20;
+                if (this.x > canvas.width + 20) this.x = -20;
+                if (this.y < -20) this.y = canvas.height + 20;
+                if (this.y > canvas.height + 20) this.y = -20;
             }
             draw() {
-                ctx.fillStyle = 'rgba(88, 166, 255, 0.4)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillStyle = `rgba(88, 166, 255, ${this.opacity})`;
+                ctx.font = `bold ${this.fontSize}px Arial`;
+                // Thay vì vẽ hình tròn, ta vẽ chữ "IIT"
+                ctx.fillText("IIT", this.x, this.y);
             }
         }
         
-        // Tạo 70 hạt electron bay lơ lửng
-        for (let i = 0; i < 70; i++) {
+        // Tạo 60 chữ IIT bay lơ lửng
+        for (let i = 0; i < 60; i++) {
             particlesArray.push(new Particle());
         }
         
@@ -219,6 +174,18 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // Hiệu ứng nút bấm (giữ nguyên từ bản gốc)
+        const dlBtn = document.getElementById('dl-btn');
+        dlBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const originalText = this.innerHTML;
+            this.innerHTML = "⏳ Đang kết nối IIT Server...";
+            setTimeout(() => {
+                this.innerHTML = "✅ Tải xuống bắt đầu!";
+                setTimeout(() => { this.innerHTML = originalText; }, 3000);
+            }, 2000);
+        });
     </script>
 </body>
 </html>
